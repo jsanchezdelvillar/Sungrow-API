@@ -1,0 +1,88 @@
+rest:
+  - resource: "https://gateway.isolarcloud.eu/openapi/login" #rgets an updated token from the API
+    method: POST
+    scan_interval: 186400  # An automation will read it when starting home assistant. In the future it will update if the sensors' post fails 
+    headers:
+      User-Agent: Home Assistant
+      x-access-key: !secret sungrow_secret #32 characters identified as Secret Key
+      Content-Type: application/json
+      sys_code: 901
+    payload: > #payload does not accept data from secrets.yaml. In the future maybe it will be changed to payload_template
+      {
+        "user_account": "mail@server.com", #your login address
+        "user_password": "password", #your login password
+        "appkey": "appkey" #32 hex numbers identified as appkey
+      }
+    sensor:
+      - name: token #choose the name of the sensor that will store the token
+        value_template: "{{ value_json.result_data.token }}"
+
+  - resource: "https://gateway.isolarcloud.eu/openapi/getDeviceRealTimeData" #currently reads only 'plant' parameters
+    method: POST
+    scan_interval: 300  # This runs every 5 minutes, adjust as needed
+    headers:
+      User-Agent: Home Assistant
+      x-access-key: !secret sungrow_secret
+      Content-Type: application/json
+      token: "{{ states('sensor.token') }}"
+      sys_code: 901
+    payload: >
+      {
+        "appkey": "appkey",
+        "device_type": 11, #data from the whole plant
+        "point_id_list": [ #choose which data to read from the api documentation
+          "83022", 
+          "83033", 
+          "83025", 
+          "83001", 
+          "83102", 
+          "83072", 
+          "83106"
+        ],
+        "ps_key_list": [ #pending adding meter data to avoid calculating the exported energy in the template
+          "xxxxxxxxx_11_0_0" #see README on how to obtain this number
+        ]
+      }
+    sensor: #one sensor for each point_id, plus a temporary one to store the whole answer
+      - name: PV to be removed #useful for debugging, stores the complete answer from the api
+        value_template: "OK"  
+        json_attributes: 
+          - result_data
+      - name: PV Daily yield
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: Wh
+        icon: mdi-transmission-tower
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83022'] }}"
+      - name: PV Power
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+        icon: mdi-lightning-bolt
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83033'] }}"
+      - name: PV Eq. hours
+        state_class: measurement
+        unit_of_measurement: h
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83025'] }}"
+      - name: PV W/Wp
+        state_class: measurement
+        unit_of_measurement: W/Wp
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83001'] }}"
+      - name: PV Energy purchased today
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: Wh
+        icon: mdi-transmission-tower
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83102'] }}"
+      - name: PV Feed-in Energy today
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: Wh
+        icon: mdi-transmission-tower
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83072'] }}"
+      - name: PV Load power
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+        icon: mdi-lightning-bolt
+        value_template: "{{ value_json['result_data']['device_point_list'][0]['device_point']['p83106'] }}"
