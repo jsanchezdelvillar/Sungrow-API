@@ -21,9 +21,45 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
 
 ## Setup procedure
 
+### Getting the key for the API
+
 - First you login into ISolarCloud
-![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/master/images/login.PNG?raw=true)
-  
+
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/login.PNG?raw=true)
+
+- Then, when you see the data of your installation, click on the four sqares at the right of the search box
+
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/iSolarCloud.PNG)
+
+- In the developer portal you will see a link to the documentation, we will use it later. Click on the link to applications
+
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/applications.PNG)
+
+- You will see then a screen where you muct click on 'Create'. In the following image you can see that I already did it, and my request was approved
+
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/create.PNG)
+
+You must give some information about why you need access to the api. In my case I just said I wanted access from Home Assistant, WITHOUT access with OAuth2.0. In a couple of days I entered the screen and the app was approved.
+
+- By clicking in 'Action' 'View' (the first icon below 'Action') you can see all the information you need to call the API
+
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/appdata.PNG)
+
+- Finally, you need to obtain your ps_key, a number composed of your ps_id (plant id), number 11 (meaning plant info) and a couple other numbers. You can do this in two ways:
+  - Since I had installed GoSungrow, I knew my ps_id (it appears in all the sensors) and then tried with ps-id_11_0_0
+  - You can go to the Documentation section and then use the following calls (for each call there is a 'try it' button). Be sure to select V1 (no OAuth2.0):
+
+    ![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/v1.PNG)
+    
+    [![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/try%20it.PNG)
+    
+    - Start with the login call:
+    
+      [!alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/login2.PNG)
+    
+
+
+
 
 ![alt text](https://github.com/MickMake/GoSungrow/blob/master/docs/iSolarCloud.png?raw=true)
 
