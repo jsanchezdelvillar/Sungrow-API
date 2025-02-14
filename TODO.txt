@@ -1,0 +1,8 @@
+- refresh token ONLY when needed, now it is every couple of days or when starting home assistant
+  - add condition to refresh the token if the API answers 'invalid token'
+- delay reading data until the token is received, or do not update data points if the answer is not correct (the first time sensors are read the token is not available yet)
+- put all private information into secrets.yaml, probably I'll have to use payload_template
+- read additional parameter, now it reads only from the 'plant'
+  - meter export data, to avoid using a template sensor
+  - other info from all devices (in my case meter, inverter and comm module)
+- get ps_key automatically
