@@ -65,7 +65,7 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
     
     - Then use the Plant List Information Query, then Query Device List and Query Basic Plan Info. Finally you will find the ps_key
 
-### Modify configuratin.yaml and template.yaml
+### Modify configuration.yaml and template.yaml
 
 Replace the appkey, the secret key, the ps_key and the point_id list with the values of your plant. You can get a list of all available point_ids in the 'Common Plant Measuring Points' under 'Common Measuring Points Enumeration' in the documentation index.
 
