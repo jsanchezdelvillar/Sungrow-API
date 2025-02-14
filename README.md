@@ -5,11 +5,11 @@ Yaml files to access Sungrow's iSolarCloud Open API
 
 MickMake (https://github.com/MickMake) has a wonderful app named GoSungrow (https://github.com/MickMake/GoSungrow) that creates MQTT sensors in HA for ALL the data points available. It uses a generic AppKey and the user's login information. I have it installed and working without any problems. 
 
-MickMake explicitly says that using the standard API is not the best, but it works, and it's fun to pregram and debug by yourself. Please be sure to access his repository to see why he finally opted for his solution.
+MickMake explicitly says that using the standard API is not the best, but it works, and it's fun to program and debug by yourself. Please be sure to access his repository to see why he finally opted for his solution.
 
 ## Why this repository?
 
-While setting up MickMake's app I had some problems with the appkey. So I accesed the 'Applications' menu option from ISolarCloud and was asked to create an app to obtain the appkey. In a couple of days I got my appkey, which didn't work with GoSungrow, and started looking at the API requirements. So, when I finally got GoSungrow working I decided to study this other solution.
+While setting up MickMake's app I had some problems with the appkey. So I accesed the 'Applications' menu option from ISolarCloud and was asked to create an app to obtain the appkey. In a couple of days I got my appkey, which didn't work with GoSungrow, and started looking at the API requirements. So, when I finally got GoSungrow working I decided to continue studying this other solution.
 
 ## What is it?
 
@@ -22,8 +22,8 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
 ## Setup procedure
 
 - First you login into ISolarCloud
+![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/master/images/login.PNG?raw=true)
   
-![alt text](https://github.com/MickMake/GoSungrow/blob/master/docs/iSolarCloudLogin.png?raw=true)
 
 ![alt text](https://github.com/MickMake/GoSungrow/blob/master/docs/iSolarCloud.png?raw=true)
 
