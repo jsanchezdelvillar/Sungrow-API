@@ -1,1 +1,11 @@
-
+sensor:
+  - name: "PV Electricidad Exportada"
+    unique_id: "pv_electricidad_exportada"
+    state: >
+      {% set producido = states('pv_power') | float(0) %}
+      {% set consumido = states('sensor.pv_load_power') | float(0) %}
+      {{ producido - consumido }} #creates a sensor that calculates the net exported power based on the solar production and the load consumption
+    unit_of_measurement: "W"
+    icon: mdi:lightning-bolt
+    device_class: power
+    state_class: measurement
