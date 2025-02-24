@@ -1,0 +1,11 @@
+- id: 'xxxxxxxxxx'
+  alias: Sungrow.py every 5 minutes
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: /5
+  conditions: []
+  actions:
+  - action: pyscript.update_device_data
+    data: {}
+  mode: single
