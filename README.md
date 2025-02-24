@@ -73,7 +73,7 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
 pyscript: !include pyscript/config.yaml
 ```
 - Install the integration **Pyscript Python scripting**
-- Under Config, create a folder named **pyscript**
+- Under Config (the root folder), create a folder named **pyscript**
 - Place in this new folder a new file **config.yaml**
   - Add the following to this file:
 ```
