@@ -1,5 +1,5 @@
 # Sungrow-API
-Yaml files to access Sungrow's iSolarCloud Open API
+PythonScript files to access Sungrow's iSolarCloud Open API
 
 ## Credits
 
@@ -15,11 +15,11 @@ While setting up MickMake's app I had some problems with the appkey. So I accese
 
 It is a DIY way of reading data from a Sungrow installation. You can choose what and when to read it
 
-These files implement the minimum ISolarCloud API calls needed to integrate the data into Home-Assistant. There are basically three parts:
+These files implement the minimum ISolarCloud API calls needed to integrate the data into Home-Assistant.
 
-- A REST Sensor added in configuration.yaml with a login request that gets the token. The token has a life of 24 hours after the last use, so basically it will not expire.
-- Also in configuration.yaml, several REST Sensors obtained through a data request, using the token obtained previously. You can easily add more sensors if you need the information.
-- Since the information I'm getting does not include the grid power, a template sensor in template.yaml to calculate the difference between the production and the load power.
+- A function calls for an update of the sensors.
+- If the call fails a function is called to update the token
+- An automation runs the first fuction every 5 minutes
 
 ## Setup procedure
 
@@ -65,13 +65,34 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
     
     - Then use the Plant List Information Query, then Query Device List and Query Basic Plan Info. Finally you will find the ps_key
 
-### Modify configuration.yaml and template.yaml
+### Installation
 
-Replace the appkey, the secret key, the ps_key and the point_id list with the values of your plant. You can get a list of all available point_ids in the 'Common Plant Measuring Points' under 'Common Measuring Points Enumeration' in the documentation index.
+- Add all needed keys (appkey, secret key, username and password) to **secrets.yaml**
+- Add the following line to **configuration.yaml**:
+```
+pyscript: !include pyscript/config.yaml
+```
+- Install the integration **Pyscript Python scripting**
+- Under Config, create a folder named **pyscript**
+- Place in this new folder a new file **config.yaml**
+  - Add the following to this file:
+```
+allow_all_imports: true
+hass_is_global: true
+  apps:
+    Sungrow:
+      appkey: !secret sungrow_appkey
+      sung_secret: !secret sungrow_secret
+      username: !secret sungrow_user
+      password: !secret sungrow_password
+```
+- Create a folder under pyscript called **apps**
+- Create a folder under apps called **Sungrow**
+- Add the file **__init__.py** with the content of the repository
 
 ### Restart Home Assistant
 
-Home Assistant will update all REST Sensors on startup. It can happen that it tries to read the points before having received a valid token. The sensors will show as unavailable, but after the set interval (5 minutes default value) it will read those sensors again.
+Home Assistant will update all Sensors on startup. In case the token is not valid it will renew it.
 
 ## TODO list
 
@@ -79,4 +100,3 @@ Right now it works well enoough for me, and I want to test it before adding addi
 
 - SECURITY!!! first with RSA encription and then through OAuth2.0
 - Adding more sensors from other devices (inverter, meter...)
-- What happens if the token is lost? It would just wait more than two days before updating it. The state of the token must be supervised.
