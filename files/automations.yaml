@@ -6,6 +6,6 @@
     minutes: /5
   conditions: []
   actions:
-  - action: pyscript.update_device_data
+  - action: pyscript.update_device_data_rsa
     data: {}
   mode: single
