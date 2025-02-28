@@ -63,11 +63,11 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
       
       ![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/f78a856c2c8e6182cc24444a1d396423656931a9/images/token.PNG)
     
-    - Then use the Plant List Information Query, then Query Device List and Query Basic Plan Info. Finally you will find the ps_key
+    - Then repeat with different calls: the Plant List Information Query, then Query Device List and Query Basic Plan Info. Finally you will find the **ps_key**
 
 ### Installation
 
-- Add all needed keys (appkey, secret key, username and password) to **secrets.yaml**
+- Add all needed keys to **secrets.yaml**
 - Add the following line to **configuration.yaml**:
 ```
 pyscript: !include pyscript/config.yaml
@@ -78,17 +78,20 @@ pyscript: !include pyscript/config.yaml
   - Add the following to this file:
 ```
 allow_all_imports: true
-hass_is_global: true
+  hass_is_global: true
   apps:
-    Sungrow:
+    Sungrow_RSA:
       appkey: !secret sungrow_appkey
       sung_secret: !secret sungrow_secret
       username: !secret sungrow_user
       password: !secret sungrow_password
+      RSA_public: !secret sungrow_rsa_public
 ```
 - Create a folder under pyscript called **apps**
-- Create a folder under apps called **Sungrow**
+- Create a folder under apps called **Sungrow_RSA**
 - Add the file **__init__.py** with the content of the repository
+- Update the code with the correct number of the **PS_key**
+- Create an automation that calls the sript **Sungrow_RSA** every x minutes
 
 ### Restart Home Assistant
 
@@ -98,5 +101,4 @@ Home Assistant will update all Sensors on startup. In case the token is not vali
 
 Right now it works well enoough for me, and I want to test it before adding additional stuff:
 
-- SECURITY!!! first with RSA encription and then through OAuth2.0
 - Adding more sensors from other devices (inverter, meter...)
