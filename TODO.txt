@@ -1,5 +1,3 @@
 - read additional parameters from other devices, now it reads only from the 'plant' device
-  - meter export data, to avoid using a template sensor
-  - other info from all devices (in my case meter, inverter and comm module)
 - get ps_key automatically, since it can be obtained through API calls
 - Security
