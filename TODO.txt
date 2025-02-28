@@ -1,3 +1,2 @@
 - read additional parameters from other devices, now it reads only from the 'plant' device
 - get ps_key automatically, since it can be obtained through API calls
-- Security
