@@ -1,8 +1,9 @@
 allow_all_imports: true
-hass_is_global: true
+  hass_is_global: true
   apps:
-    Sungrow:
+    Sungrow_RSA:
       appkey: !secret sungrow_appkey
       sung_secret: !secret sungrow_secret
       username: !secret sungrow_user
       password: !secret sungrow_password
+      RSA_public: !secret sungrow_rsa_public
