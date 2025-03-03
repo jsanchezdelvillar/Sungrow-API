@@ -108,7 +108,7 @@ async def get_device_data(token):
             "point_id_list": [
                 "83022", "83033", "83025", "83001", "83102", "83072", "83106"
             ],
-            "ps_key_list": ["5694969_11_0_0"]
+            "ps_key_list": ["xxxxxxx_11_0_0"]
         }
         log.info (f"Device payload: {device_data_payload}")
         encrypted_request_body = encrypt(json.dumps(device_data_payload), unenc_x_random_secret_key)
