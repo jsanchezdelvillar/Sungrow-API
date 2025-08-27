@@ -25,13 +25,7 @@ These files implement the minimum ISolarCloud API calls needed to integrate the 
 
 ### Getting the information needed for the API queries
 
-- First you login into ISolarCloud
-
-![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/login.PNG?raw=true)
-
-- Then, when you see the data of your installation, click on the four sqares at the right of the search box
-
-![alt_text](https://github.com/jsanchezdelvillar/Sungrow-API/blob/d148931d3dd7e9440bdbda6e44213b3f15a0e653/images/iSolarCloud.PNG)
+- First you login into ISolarCloud's [developer portal](https://developer-api.isolarcloud.com/)
 
 - In the developer portal you will see a link to the documentation, we will use it later. Click on the link to applications
 
